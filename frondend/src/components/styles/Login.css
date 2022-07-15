@@ -1,0 +1,125 @@
+.login {
+	display: flex;
+	background-color: black;
+	justify-content: center;
+	align-items: center;
+}
+
+/* h3 rgba(255, 255, 255, 1) */
+
+.login__container {
+	background-color: #000000;
+	width: 358px;
+	position: relative;
+}
+
+.login__title {
+	padding: 0;
+	margin: 0;
+	font-weight: 900;
+	font-size: 24px;
+	line-height: 29px;
+	color: #ffffff;
+	margin-top: 60px;
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+.login__form {
+	display: grid;
+	gap: 30px;
+	grid-template-rows: 27px 27px;
+}
+
+.login__label {
+	display: grid;
+}
+
+.login__item {
+	font-size: 14px;
+	font-weight: 500;
+	width: 358px;
+	padding: 0;
+	margin: 0 auto;
+	border-style: none;
+	line-height: 17px;
+	border-bottom: 2px solid rgba(204, 204, 204, 1);
+	padding-bottom: 12px;
+	background-color: #000000;
+	color: #ffffff;
+}
+
+.login__item::placeholder {
+	font-family: "Inter", "Arial", sans-serif;
+	font-weight: normal;
+	color: rgba(204, 204, 204, 1);
+}
+
+.login__item::-webkit-input-placeholder {
+	font-family: "Inter", "Arial", sans-serif;
+	font-weight: normal;
+	color: rgba(204, 204, 204, 1);
+}
+.login__item::-moz-placeholder {
+	font-family: "Inter", "Arial", sans-serif;
+	font-weight: normal;
+	color: rgba(204, 204, 204, 1);
+}
+
+.login__item::-ms-input-placeholder {
+	font-weight: normal;
+	color: rgba(204, 204, 204, 1);
+}
+.login__message {
+	width: 1000%;
+	max-width: 358px;
+	opacity: 0;
+	/* margin-left: 34px; */
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 15px;
+	color: #ff0000;
+}
+/* @media screen and (max-width: 767px) {
+  .login__message {
+    max-width: 238px;
+    margin-left: 22px;
+  }
+} */
+
+.login__save-button {
+	padding: 0;
+	max-width: 358px;
+	height: 50px;
+	border-style: none;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
+	text-align: center;
+	color: #000000;
+	background: #ffffff;
+	border-radius: 2px;
+	margin-top: 186px;
+	margin-bottom: 15px;
+}
+
+.login__save-button:hover {
+	opacity: 0.85;
+}
+
+.login__link {
+	display: flex;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	color: #ffffff;
+	margin-bottom: 80px;
+	text-decoration: none;
+	margin: 0 auto;
+	justify-content: center;
+	width: 358px;
+}
+
+.login__link:hover {
+	opacity: 0.6;
+}

@@ -1,0 +1,9 @@
+.popup__figure {
+  display: flex;
+  margin: 0;
+  max-width: 75vw;
+  max-height: 75vh;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}

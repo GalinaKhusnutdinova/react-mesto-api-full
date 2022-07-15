@@ -1,0 +1,17 @@
+.popup__delete-button {
+  background-image: url(../../../images/delete.svg);
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 19px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 2;
+}
+
+.popup__delete-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

@@ -1,0 +1,14 @@
+.popup__item_add::placeholder {
+  color: #c4c4c4;
+}
+
+.popup__item::-webkit-input-placeholder {
+  color: #c4c4c4;
+}
+.popup__item::-moz-placeholder {
+  color: #c4c4c4;
+}
+
+.popup__item::-ms-input-placeholder {
+  color: #c4c4c4;
+}
