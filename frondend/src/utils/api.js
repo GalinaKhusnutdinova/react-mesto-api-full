@@ -78,11 +78,10 @@ class Api {
   }
 }
 // const baseUrl = `${'http://api.khusnutdinova.student.nomoredomains.xyz' || 'http://localhost:3001'}` 
-const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`
 
 
 export const api = new Api({
-  baseUrl: baseUrl,
+  baseUrl: `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`,
   headers: {
     authorization: 'Bearer ' + localStorage.getItem('jwt'),
     "Content-Type": "application/json",
