@@ -1,11 +1,13 @@
 class Api {
   constructor(settings) {
     this._settings = settings;
+    console.log(settings)
   }
   //qq
   getProfile() {
     return fetch(this._settings.baseUrl + "/users/me", {
       headers: this._settings.headers,
+      credentials: 'include',  
     }).then(this._checkResponse);
   }
   //qq
@@ -18,7 +20,7 @@ class Api {
   editProfile(data) {
     return fetch(this._settings.baseUrl + "/users/me", {
       method: "PATCH",
-      headers: this._settings.headers,
+      headers: this._settings.headers, 
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -61,7 +63,7 @@ class Api {
   editAvatarProfile(data) {
     return fetch(this._settings.baseUrl + "/users/me/avatar", {
       method: "PATCH",
-      headers: this._settings.headers,
+      headers: this._settings.headers, 
       body: JSON.stringify({
         avatar: data.avatar,
       }),
@@ -75,11 +77,14 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 }
+// const baseUrl = `${'http://api.khusnutdinova.student.nomoredomains.xyz' || 'http://localhost:3001'}` 
+const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`
+
 
 export const api = new Api({
-  baseUrl: "https://khusnutdinova.student.nomoredomains.xyz",
+  baseUrl: baseUrl,
   headers: {
-    authorization: "30d87b7f-295d-4117-804d-85c019cdba1c",
+    authorization: 'Bearer ' + localStorage.getItem('jwt'),
     "Content-Type": "application/json",
   },
 });

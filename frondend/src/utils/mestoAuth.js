@@ -1,4 +1,5 @@
-export const BASE_URL = "https://khusnutdinova.student.nomoredomains.xyz";
+// export const BASE_URL = `${'http://api.khusnutdinova.student.nomoredomains.xyz' || 'http://localhost:3001'}`;
+export const BASE_URL = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
