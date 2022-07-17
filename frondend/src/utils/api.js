@@ -6,21 +6,21 @@ class Api {
   //qq
   getProfile() {
     return fetch(this._settings.baseUrl + "/users/me", {
-      headers: this._settings.headers,
+      headers: this._headersJwt(),
       credentials: 'include',  
     }).then(this._checkResponse);
   }
   //qq
   getInitialCards() {
     return fetch(this._settings.baseUrl + "/cards", {
-      headers: this._settings.headers,
+      headers: this._headersJwt(),
     }).then(this._checkResponse);
   }
   //qq
   editProfile(data) {
     return fetch(this._settings.baseUrl + "/users/me", {
       method: "PATCH",
-      headers: this._settings.headers, 
+      headers: this._headersJwt(), 
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -31,7 +31,7 @@ class Api {
   addNewCard(item) {
     return fetch(this._settings.baseUrl + "/cards", {
       method: "POST",
-      headers: this._settings.headers,
+      headers: this._headersJwt(),
       body: JSON.stringify({
         name: item.name,
         link: item.link,
@@ -42,21 +42,21 @@ class Api {
   deleteCard(id) {
     return fetch(this._settings.baseUrl + "/cards/" + id, {
       method: "DELETE",
-      headers: this._settings.headers,
+      headers: this._headersJwt(),
     }).then(this._checkResponse);
   }
   //qq
   deleteLike(id) {
     return fetch(this._settings.baseUrl + "/cards/" + id + "/likes", {
       method: "DELETE",
-      headers: this._settings.headers,
+      headers: this._headersJwt(),
     }).then(this._checkResponse);
   }
   //qq
   addLike(id) {
     return fetch(this._settings.baseUrl + "/cards/" + id + "/likes", {
       method: "PUT",
-      headers: this._settings.headers,
+      headers: this._headersJwt(),
     }).then(this._checkResponse);
   }
   //qq
@@ -88,7 +88,6 @@ const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '
 export const api = new Api({
   baseUrl: baseUrl,
   headers: {
-    authorization: 'Bearer ' + localStorage.getItem('token'),
     "Content-Type": "application/json",
   },
 });
