@@ -71,7 +71,7 @@ class Api {
   }
 
   _headersJwt() {
-    return {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._settings.headers};
+    return {authorization: 'Bearer ' + localStorage.getItem('token'), ...this._settings.headers};
   }
 
   _checkResponse(res) {
