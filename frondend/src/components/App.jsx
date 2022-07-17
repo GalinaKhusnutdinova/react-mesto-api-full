@@ -74,6 +74,7 @@ function App() {
     api
       .editProfile(data)
       .then((res) => {
+        console.log('res', res)
         setCurrentUser(res);
         closeAllPopups();
       })
@@ -96,12 +97,11 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((user) => user._id === currentUser._id);
-
+    const isLiked = card.likes.some((user) => user  === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     const request = isLiked ? api.deleteLike(card._id) : api.addLike(card._id);
     request
-      .then((newCard) => {
+      .then((newCard) => {      
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
         );
@@ -179,7 +179,7 @@ function App() {
       mestoAuth.getContent(token).then((res) => {
         if (res) {
           let userData = {
-            email: res.data.email,
+            email: res.email,
           };
 
           setLoggedIn(true);

@@ -13,7 +13,13 @@ const InternalServerError = require('../errors/InternalServerError'); // 500
 // GET-запрос возвращает всех пользователей из базы данных
 module.exports.findUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send({
+      about: users.about,
+      avatar: users.avatar,
+      email: users.email,
+      name: users.name,
+      _id: users._id,
+    }))
     .catch(() => next(new InternalServerError('Ошибка по умолчанию.')))
     .catch(next);
 };
@@ -22,7 +28,13 @@ module.exports.findUsers = (req, res, next) => {
 module.exports.findByIdUser = (req, res, next) => {
   User.findById(req.params.userId)
     .orFail(() => next(new NotFound('Пользователь по указанному _id не найден')))
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send({
+      about: user.about,
+      avatar: user.avatar,
+      email: user.email,
+      name: user.name,
+      _id: user._id,
+    }))
     .catch((err) => {
       if (err.errors) {
         // получили все ключи
@@ -51,7 +63,7 @@ module.exports.findOnedUserMe = (req, res, next) => {
         next(new NotFound('Пользователь по указанному _id не найден'));
         return;
       }
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((err) => {
       if (err.errors) {
@@ -126,10 +138,7 @@ module.exports.updateUserMe = (req, res, next) => {
     },
   )
     .orFail(() => next(new NotFound('Пользователь с указанным _id не найден.')))
-    .then(() => res.send({
-      name,
-      about,
-    }))
+    .then((data) => res.send(data))
     .catch((err) => {
       if (err.errors) {
         // получили все ключи
@@ -165,7 +174,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
     .orFail(() => {
       throw new NotFound('Не передан емейл или пароль');
     })
-    .then((data) => res.send({ data }))
+    .then((data) => res.send(data))
     .catch((err) => {
       if (err.errors) {
         // получили все ключи

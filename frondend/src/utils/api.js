@@ -63,11 +63,15 @@ class Api {
   editAvatarProfile(data) {
     return fetch(this._settings.baseUrl + "/users/me/avatar", {
       method: "PATCH",
-      headers: this._settings.headers, 
+      headers: this._headersJwt(), 
       body: JSON.stringify({
         avatar: data.avatar,
       }),
     }).then(this._checkResponse);
+  }
+
+  _headersJwt() {
+    return {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._settings.headers};
   }
 
   _checkResponse(res) {
@@ -77,14 +81,14 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 }
-// const baseUrl = `${'http://api.khusnutdinova.student.nomoredomains.xyz' || 'http://localhost:3001'}` 
+
 const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`
 
 
 export const api = new Api({
   baseUrl: baseUrl,
   headers: {
-    authorization: 'Bearer ' + localStorage.getItem('jwt'),
+    authorization: 'Bearer ' + localStorage.getItem('token'),
     "Content-Type": "application/json",
   },
 });
