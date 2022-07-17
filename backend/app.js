@@ -14,13 +14,6 @@ const NotFound = require('./errors/NotFound'); // 404
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
-// Слушаем 3000 порт
-const { PORT = 3001 } = process.env;
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// подключаемся к серверу mongo
-mongoose.connect('mongodb://localhost:27017/mestodb');
 
 const options = {
   origin: [
@@ -35,6 +28,14 @@ const options = {
 };
 
 app.use('*', cors(options)); // Подключаем первой миддлварой
+
+// Слушаем 3000 порт
+const { PORT = 3001 } = process.env;
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// подключаемся к серверу mongo
+mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(requestLogger); // подключаем логгер запросов
 
