@@ -27,9 +27,6 @@ router.delete('/:cardId', celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24).required(),
   }),
-  headers: Joi.object().keys({
-    authorization: Joi.string(),
-  }).unknown(true),
 }), deleteCard);
 
 // сработает при PUT-запросе на URL /:cardId/likes — поставить лайк карточке
@@ -37,9 +34,6 @@ router.put('/:cardId/likes', celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24).required(),
   }),
-  headers: Joi.object().keys({
-    authorization: Joi.string(),
-  }).unknown(true),
 }), likeCard);
 
 // сработает при DELETE-запросе на URL /:cardId/likes — поставить дизлайк карточке
@@ -47,9 +41,6 @@ router.delete('/:cardId/likes', celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24).required(),
   }),
-  headers: Joi.object().keys({
-    authorization: Joi.string(),
-  }).unknown(true),
 }), dislikeCard);
 
 module.exports = router;

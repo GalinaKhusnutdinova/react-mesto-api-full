@@ -43,7 +43,7 @@ module.exports.createCard = (req, res, next) => {
         return;
       }
 
-      next();
+      next(err);
     })
     .catch(next);
 };
@@ -57,28 +57,17 @@ module.exports.deleteCard = (req, res, next) => {
       const userId = req.user._id.toString();
 
       if (userId !== owner) {
-        next(new Forbidden('Вы не можете удалять чужие каточки'));
-        return;
+        return next(new Forbidden('Вы не можете удалять чужие каточки'));
       }
-      Card.findByIdAndRemove(card)
-        .then(() => res.send({ data: card }));
+      return Card.findByIdAndRemove(card);
     })
+    .then((card) => res.send({ data: card }))
     .catch((err) => {
-      if (err.errors) {
-        // получили все ключи
-        const errorKeys = Object.keys(err.errors);
-        // взяли ошибку по первому ключу, и дальше уже в ней смотреть.
-        const error = err.errors[errorKeys[0]];
-        if (err.name === 'ValidationError') {
-          next(new ValidationError(`Карточка с указанным _id не найдена. ${error}`));
-          return;
-        }
-      }
       if (err.name === 'CastError') {
         next(new ValidationError('Переданы некорректные данные при создании пользователя.'));
         return;
       }
-      next();
+      next(err);
     })
     .catch(next);
 };
@@ -93,21 +82,11 @@ module.exports.likeCard = (req, res, next) => {
     .orFail(() => next(new NotFound('Передан несуществующий _id карточки.')))
     .then((card) => res.send(card))
     .catch((err) => {
-      if (err.errors) {
-        // получили все ключи
-        const errorKeys = Object.keys(err.errors);
-        // взяли ошибку по первому ключу, и дальше уже в ней смотреть.
-        const error = err.errors[errorKeys[0]];
-        if (err.name === 'ValidationError') {
-          next(new ValidationError(`Переданы некорректные данные для постановки лайка. ${error}`));
-          return;
-        }
-      }
       if (err.name === 'CastError') {
         next(new ValidationError('Переданы некорректные данные для постановки лайка.'));
         return;
       }
-      next();
+      next(err);
     })
     .catch(next);
 };
@@ -124,21 +103,11 @@ module.exports.dislikeCard = (req, res, next) => {
       res.send(card);
     })
     .catch((err) => {
-      if (err.errors) {
-        // получили все ключи
-        const errorKeys = Object.keys(err.errors);
-        // взяли ошибку по первому ключу, и дальше уже в ней смотреть.
-        const error = err.errors[errorKeys[0]];
-        if (err.name === 'ValidationError') {
-          next(new ValidationError(`Переданы некорректные данные для снятии лайка. ${error}`));
-          return;
-        }
-      }
       if (err.name === 'CastError') {
         next(new ValidationError('Переданы некорректные данные для снятии лайка.'));
         return;
       }
-      next();
+      next(err);
     })
     .catch(next);
 };

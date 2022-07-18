@@ -1,7 +1,6 @@
 class Api {
   constructor(settings) {
     this._settings = settings;
-    console.log(settings)
   }
   //qq
   getProfile() {

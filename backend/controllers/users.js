@@ -36,21 +36,11 @@ module.exports.findByIdUser = (req, res, next) => {
       _id: user._id,
     }))
     .catch((err) => {
-      if (err.errors) {
-        // получили все ключи
-        const errorKeys = Object.keys(err.errors);
-        // взяли ошибку по первому ключу, и дальше уже в ней смотреть.
-        const error = err.errors[errorKeys[0]];
-        if (err.name === 'ValidationError') {
-          next(new ValidationError(`Переданы некорректные данные при создание пользователя. ${error}`));
-          return;
-        }
-      }
       if (err.name === 'CastError') {
         next(new ValidationError('Переданы некорректные данные при создание пользователя.'));
         return;
       }
-      next();
+      next(err);
     })
     .catch(next);
 };
@@ -66,21 +56,11 @@ module.exports.findOnedUserMe = (req, res, next) => {
       res.send(user);
     })
     .catch((err) => {
-      if (err.errors) {
-        // получили все ключи
-        const errorKeys = Object.keys(err.errors);
-        // взяли ошибку по первому ключу, и дальше уже в ней смотреть.
-        const error = err.errors[errorKeys[0]];
-        if (err.name === 'ValidationError') {
-          next(new ValidationError(`Переданы некорректные данные при создание пользователя. ${error}`));
-          return;
-        }
-      }
       if (err.name === 'CastError') {
         next(new ValidationError('Переданы некорректные данные при создание пользователя.'));
         return;
       }
-      next();
+      next(err);
     })
     .catch(next);
 };
@@ -120,7 +100,7 @@ module.exports.createUser = (req, res, next) => {
         }
       }
 
-      next();
+      next(err);
     })
     .catch(next);
 };
@@ -154,7 +134,7 @@ module.exports.updateUserMe = (req, res, next) => {
         next(new ValidationError('Переданы некорректные данные при обновлении профиля.'));
         return;
       }
-      next();
+      next(err);
     })
     .catch(next);
 };
@@ -190,7 +170,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
         next(new ValidationError('Переданы некорректные данные при обновлении профиля.'));
         return;
       }
-      next();
+      next(err);
     })
     .catch(next);
 };
