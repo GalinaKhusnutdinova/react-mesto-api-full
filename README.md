@@ -3,8 +3,8 @@
   
 ## Cсылка на сайт, размещенный на Яндекс.Облаке:
 
-####[домен](http://khusnutdinova.student.nomoredomains.xyz/)
+[домен](http://khusnutdinova.student.nomoredomains.xyz/)
 
-####[домен сервера](http://api.khusnutdinova.student.nomoredomains.xyz/)
+[домен сервера](http://api.khusnutdinova.student.nomoredomains.xyz/)
 
 #### публичный IP-адрес сервера: 51.250.77.74
